@@ -20,56 +20,36 @@
                 <span class="input-group-text">待辦事項</span>
                 <input type="text" class="form-control" placeholder="準備要做的任務"
               id="newTodo">
-                <button class="btn btn-primary" type="button" id="addTodo">新增</button>
+                <button class="btn btn-primary" type="button" id="addTodo" @click="add">新增</button>
             </div>
             <div class="card text-center">
                 <ul class="list-group list-group-flush text-left" id="todoList">
-                <li  class="list-group-item">
-                    <div class="d-flex">
-                    <div class="form-check">
-                        <div>
-                        <input id="a" type="checkbox" class="form-check-input">
-                        <label for="a">代辦事項</label>
+                    <li v-for="todo in filterTodo" class="list-group-item">
+                        <div class="d-flex">
+                        <div class="form-check">
+                            <div>
+                                <input id="todo.id" type="checkbox" class="form-check-input" @click="todo.completed = !todo.completed" :checked="todo.completed">
+                                <label for="todo.id" :class="todo.completed ? 'completed': ''">{{todo.text}}</label>
+                            </div>
                         </div>
-                    </div>
-                    <button type="button" class="btn-close ms-auto remove">
-                    </button>
-                    </div>
-                </li>
-                <li  class="list-group-item">
-                    <div class="d-flex">
-                    <div class="form-check">
-                        <div>
-                        <input id="b" type="checkbox" class="form-check-input" checked>
-                        <label for="b" class="completed">已完成 代辦事項</label>
+                            <button type="button" class="btn-close ms-auto remove" @click="removeTodo(todo)"></button>
                         </div>
-                    </div>
-                    <button type="button" class="btn-close ms-auto remove">
-                    </button>
-                    </div>
-                </li>
-                <li  class="list-group-item">
-                    <div class="d-flex">
-                    <div class="form-check">
-                        <input class="form-control" type="text" placeholder="編輯"/>
-                    </div>
-                    </div>
-                </li>
+                    </li>
                 </ul>
                 <div class="card-footer d-flex justify-content-between">
-                    <span>有 <span id="taskCount">1</span> 筆任務</span>
+                    <span>有 <span id="task">{{todoList.length}}</span> 筆任務</span>
                     <div>
-                        <a href="#" class="me-3">全部</a>
-                        <a href="#" class="me-3">未完成</a>
-                        <a href="#" class="me-3">已完成</a>
-                        <a href="#" >清除所有任務</a>
+                        <a href="#" class="me-3" @click.prevent="status = 'all">全部</a>
+                        <a href="#" class="me-3" @click.prevent="status = 'active">未完成</a>
+                        <a href="#" class="me-3" @click.prevent="status = 'completed">已完成</a>
+                        <a href="#" @click="clear">清除所有任務</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.1/vue.esm-browser.min.js" integrity="sha512-i7GKt52btdwlTba47cGT6d9MJAMppqgviUwmXEcMoJ0DsvMTed/ppnMlIl+c14AhsNAt7nEiAnMGBm6N32pN6Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="script.js"></script>
 </body>
 </html>
