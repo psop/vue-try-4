@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <title>Composition API（原 Options API 實戰運用）</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="text">
+        <button type="button" @click="addItem">新增</button>
+        <ul>
+            <li v-for="item in data" :key="item.id">
+                {{item.text}}
+                <button type="button" @click="editItem(item)">編輯</button>
+                <button type="button" @click="removeItem(item)">刪除</button>
+            </li>
+        </ul>
+        <input type="text" v-model='temp.text'>
+        <button type="button" @click="doneItem">編輯完成</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script type="module">
+        import {createApp, ref, onMounted} from 'https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.8/vue.esm-browser.min.js'
+
+        const app = createApp({
+            setup() {
+                const text = ref('')
+                const data = ref([])
+                const temp = ref({})
+
+                function addItem() {
+                    data.value.push({
+                        id: data.value.length + 1,
+                        text: text.value
+                    })
+                    text.value = ''
+                }
+
+                function removeItem(item) {
+	                const index = data.value.findIndex(obj => obj.id === item.id)
+	                data.value.splice(index, 1)
+                }
+
+                function editItem(item) {
+                    temp.value = {...item}
+                }
+
+                function doneItem(item) {
+                    const index = data.value.findIndex(obj => obj.id === temp.value.id)
+                    data.value[index] = temp.value
+                    temp.value = {}
+                }
+
+                return {
+                    text,
+                    data,
+                    temp,
+                    addItem,
+                    removeItem,
+                    editItem,
+                    doneItem
+                }
+            }
+        })
+        app.mount('#app')
+    </script>
+</body>
+</html>
