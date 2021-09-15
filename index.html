@@ -14,35 +14,31 @@
     <title>Todo list with composition API</title>
 </head>
 <body>
-    <div id="app">
-        <div id="app" class="container my-3">
-            <div class="input-group mb-3">
-                <span class="input-group-text">待辦事項</span>
-                <input type="text" class="form-control" placeholder="準備要做的任務" v-model="todo">
-                <button class="btn btn-primary" type="button" @click="add">新增</button>
-            </div>
-            <div class="card text-center">
-                <ul class="list-group list-group-flush text-left" id="todoList">
-                    <li v-for="todo in todoList" class="list-group-item">
-                        <div class="d-flex">
-                            <div class="form-check">
-                                <div>
-                                    <input id="todo.id" type="checkbox" class="form-check-input" @click="todo.completed = !todo.completed" :checked="todo.completed">
-                                    <label for="todo.id" :class="todo.completed ? 'completed': ''">{{todo.text}}</label>
-                                </div>
-                            </div>
-                            <button type="button" class="btn-close ms-auto remove" @click="remove(todo)"></button>
+    <div id="app" class="container my-3">
+        <div class="input-group mb-3">
+            <span class="input-group-text">待辦事項</span>
+            <input type="text" class="form-control" placeholder="準備要做的任務" v-model="todo">
+            <button class="btn btn-primary" type="button" @click="add">新增</button>
+        </div>
+        <div class="card text-center">
+            <ul class="list-group list-group-flush text-left" id="todoList">
+                <li v-for="todo in todoList" class="list-group-item">
+                    <div class="d-flex">
+                        <div class="form-check">
+                            <input id="todo.id" type="checkbox" class="form-check-input" @click="todo.completed = !todo.completed" :checked="todo.completed">
+                            <label for="todo.id" :class="todo.completed ? 'completed': ''">{{todo.text}}</label>
                         </div>
-                    </li>
-                </ul>
-                <div class="card-footer d-flex justify-content-between">
-                    <span>有 <span>{{todoList.length}}</span> 筆任務</span>
-                    <div>
-                        <a href="#" class="me-3" @click.prevent="visibility = 'all'">全部</a>
-                        <a href="#" class="me-3" @click.prevent="visibility = 'active'">未完成</a>
-                        <a href="#" class="me-3" @click.prevent="visibility = 'completed'">已完成</a>
-                        <a href="#" @click="clear">清除所有任務</a>
+                        <button type="button" class="btn-close ms-auto remove" @click="remove(todo)"></button>
                     </div>
+                </li>
+            </ul>
+            <div class="card-footer d-flex justify-content-between">
+                <span>有 <span>{{todoList.length}}</span> 筆任務</span>
+                <div>
+                    <a href="#" class="me-3" @click.prevent="visibility = 'all'">全部</a>
+                    <a href="#" class="me-3" @click.prevent="visibility = 'active'">未完成</a>
+                    <a href="#" class="me-3" @click.prevent="visibility = 'completed'">已完成</a>
+                    <a href="#" @click="clear">清除所有任務</a>
                 </div>
             </div>
         </div>

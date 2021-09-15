@@ -1,10 +1,10 @@
-import {createApp, ref} from 'https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.1/vue.esm-browser.min.js'
+import {createApp, ref, computed} from 'https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.1/vue.esm-browser.min.js'
 
 const app = createApp({
     setup() {
         const todo = ref('')
         const todoList = ref([])
-        const status = ref('all')
+        const visibility = ref('all')
 
         function add() {
             todoList.value.push({
@@ -20,6 +20,17 @@ const app = createApp({
             todoList.value.splice(index, 1)
         }
 
+        const filterTodos = computed(() => {
+            switch (visibility.value) {
+                case 'active':
+                    return todoList.filter(todo => !todo.completed)
+                case 'complete':
+                    return todoList.filter(todo => todo.completed)
+                default:
+                    return todoList
+            }
+        })
+
         function clear() {
             if(window.confirm('確定要全部刪除？')) {
                 todoList.value = []
@@ -32,6 +43,7 @@ const app = createApp({
             status,
             add,
             remove,
+            filterTodos,
             clear,
         }
     }
