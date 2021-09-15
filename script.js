@@ -1,4 +1,4 @@
-import {createApp, ref, computed} from 'https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.1/vue.esm-browser.min.js'
+import {createApp, ref, computed, onMounted} from 'https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.1/vue.esm-browser.min.js'
 
 const app = createApp({
     setup() {
@@ -13,12 +13,27 @@ const app = createApp({
                 completed: false, 
             })
             todo.value = ''
+            updateLS()
         }
 
         function remove(todo) {
             const index = todoList.value.findIndex(obj => obj.id === todo.id)
             todoList.value.splice(index, 1)
+            updateLS()
         }
+        
+        function clear() {
+            if(window.confirm('確定要全部刪除？')) {
+                todoList.value = []
+            }
+            updateLS()
+        }
+
+        function updateLS() {
+            localStorage.setItem("todos", JSON.stringify(todoList.value))
+        }
+
+        onMounted(() => todoList.value = JSON.parse(localStorage.getItem("todos")) || []) 
 
         const filterTodos = computed(() => {
             switch (visibility.value) {
@@ -30,12 +45,6 @@ const app = createApp({
                     return todoList
             }
         })
-
-        function clear() {
-            if(window.confirm('確定要全部刪除？')) {
-                todoList.value = []
-            }
-        }
         
         return {
             todo,
