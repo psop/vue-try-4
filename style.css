@@ -1,0 +1,240 @@
+/* designed by Hexschool https://hexschool.github.io/js-todo/#artboard0 */
+/* -- Index --
+1. global settings 
+2. top (add)
+3. middle (list)
+4. bottom (count & select)
+5. extra margin & padding*/
+
+
+/* global settings */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC&family=Baloo+Tammudu+2:wght@700&display=swap');
+
+:root {
+    --primary-color: #333333;
+    --secondary-color: #9F9A91;
+    --white: white;
+    --background: #FFD370;
+    --gray-white: #E8E8E8;
+    --light-line: #EFEFEF;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: linear-gradient(174deg, var(--background) 2%, var(--background) 46%, var(--white) 46%, var(--white) 100%, var(--gray-white) 100%);
+    height: 100vh;
+    color: var(--primary-color);
+}
+
+.container {
+    max-width: 500px;
+    height: auto;
+    margin-top: 48px;
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+/* top */
+h1 {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 48px;
+    font-family: 'Baloo Tammudu 2', sans-serif;
+    font-weight: bold;
+    margin-bottom: 26px;
+}
+
+.add {
+    width: 500px;
+    height: 48px;
+    background: var(--white);
+    box-shadow: 0 0 15px 0 rgba(0,0,0,0.15);
+    border-radius: 10px;
+    position: relative;
+    margin-bottom: 8px;
+}
+
+.txt {
+    width: 456px;
+    height: 48px;
+    padding: 12px 24px;
+    border: none;
+    font-size: 16px;
+    border-radius: 10px;
+}
+
+.txt:focus {
+    outline: 0;
+}
+
+.input::placeholder {
+    color: var(--secondary-color);
+}
+
+.input:focus,
+.btn:focus {
+    outline: none;
+}
+
+.btn {
+    width: 40px;
+    height: 40px;
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    border: none;
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    cursor: pointer;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+.fa-plus {
+    font-size: 20px;
+    color: var(--white);
+    text-align: center;
+}
+
+/* middle */
+.list {
+    max-width: 500px;
+    background-color: var(--white);
+    box-shadow: 0 5px 15px 0 rgba(0,0,0,0.15);
+    border-radius: 10px;
+    font-family: "Noto Sans TC", sans-serif;    
+}
+
+.filter {
+    display: flex;
+    height: 48px;
+    padding: 16px auto;
+}
+
+.page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 33.33%;
+    height: 48px;
+    background-color: var(--white);
+    border: none;
+    border-bottom: var(--secondary-color);
+    color: var(--secondary-color);
+    font-size: 14px;
+    cursor: pointer;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.active {
+    color: var(--primary-color);
+    font-weight: 700;
+    border-bottom: 1px solid var(--primary-color);
+}
+
+.todos {
+    position: relative;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.todo {
+    padding: 1rem 2rem;
+    border-bottom: 1px solid var(--light-line);
+    font-size: 1.2rem;
+    font-family: "Noto Sans TC", sans-serif;
+}
+
+label {
+	display: inline-block;
+    cursor: pointer;
+}
+
+.checkbox {
+	display: none;
+}
+
+span {
+    font-family: "Noto Sans TC", sans-serif;
+}
+
+.checkbox + label {
+	background-color: var(--white);
+	border: 1px solid var(--primary-color);
+    width: 20px;
+    height: 20px;
+	padding: 9px;
+	border-radius: 5px;
+	display: inline-block;
+	position: relative;
+    margin-right: 20px;
+}
+
+.checkbox:checked + label {
+	background-color: var(--white);
+	border: none;
+}
+
+.checkbox:checked + label::after {
+	content: '\2714';
+	font-size: 20px;
+	position: absolute;
+	top: 0px;
+	left: 3px;
+	color: var(--background);
+}
+
+.checkbox:checked + label + span {
+    text-decoration: line-through;
+    color: var(--secondary-color);
+}
+
+.delete {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 24px;
+    background-color: var(--white);
+    border: none;
+}
+
+.fa-times {
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* bottom (count & select) */
+.bottom {
+    padding: 24px 24px 32px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.count {
+    color: var(--primary-color);
+    font-size: 14px;
+}
+
+.select {
+    background-color: var(--white);
+    border: none;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+.select:hover {
+    color: var(--primary-color);
+}
+
+/* extra margin & padding */
