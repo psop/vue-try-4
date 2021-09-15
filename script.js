@@ -19,6 +19,12 @@ const app = createApp({
             const index = todoList.value.findIndex(obj => obj.id === todo.id)
             todoList.value.splice(index, 1)
         }
+
+        function clear() {
+            if(window.confirm('確定要全部刪除？')) {
+                todoList.value = []
+            }
+        }
         
         return {
             todo,
@@ -26,6 +32,7 @@ const app = createApp({
             status,
             add,
             remove,
+            clear,
         }
     }
 }).mount('#app')
